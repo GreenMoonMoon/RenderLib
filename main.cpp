@@ -35,6 +35,7 @@ int main() {
     glfwSetWindowSizeCallback(window, framebuffer_size_callback);
 
     //Set debug object
+    Shader shader = Shader();
     Mesh mesh = Mesh();
 
     while(!glfwWindowShouldClose(window))
@@ -44,7 +45,7 @@ int main() {
         glClearColor(0.2f, 0.2f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        mesh.Draw();
+        mesh.Draw(shader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

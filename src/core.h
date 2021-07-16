@@ -5,6 +5,8 @@
 #ifndef RENDERLIB_CORE_H
 #define RENDERLIB_CORE_H
 
+#include <iostream>
+
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
