@@ -5,6 +5,10 @@
 #ifndef RENDERLIB_SHADER_H
 #define RENDERLIB_SHADER_H
 
+#include <iostream>
+#include <fstream>
+#include <string>
+
 #include "core.h"
 
 class Shader {
@@ -15,7 +19,9 @@ public:
 
     Shader(const char *vertex_source, const char *fragment_source);
 
-    void Use();
+    void LoadFromFile(const char *vertexFile, const char *fragmentFile);
+
+    void Use() const;
 
 private:
     void Build(const char *vertex_source, const char *fragment_source);

@@ -19,16 +19,28 @@ const char *basic_fs_source = "#version 460 core\n"
                               "}";
 
 Shader::Shader() {
-    Build(basic_vs_source, basic_fs_source);
+    mProgram = -1;
 }
 
 Shader::Shader(const char *vertex_source, const char *fragment_source) {
     Build(vertex_source, fragment_source);
 }
 
+void Shader::LoadFromFile(const char *vertexFile, const char *fragmentFile) {
+    std::ifstream inVertexStream{vertexFile};
+    std::string vertexSource((std::istreambuf_iterator<char>(inVertexStream)), std::istreambuf_iterator<char>());
+    inVertexStream.close();
+
+    std::ifstream inFragmentStream{fragmentFile};
+    std::string fragmentSource((std::istreambuf_iterator<char>(inFragmentStream)), std::istreambuf_iterator<char>());
+    inVertexStream.close();
+
+    Build(vertexSource.c_str(), fragmentSource.c_str());
+}
+
 void Shader::Build(const char *vertex_source, const char *fragment_source) {
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertex_source, NULL);
+    glShaderSource(vertexShader, 1, &vertex_source, nullptr);
     glCompileShader(vertexShader);
     if (!ValidateShader(vertexShader, "vertex")) {
         return;
@@ -36,7 +48,7 @@ void Shader::Build(const char *vertex_source, const char *fragment_source) {
 
     GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glCompileShader(fragmentShader);
-    glShaderSource(fragmentShader, 1, &fragment_source, NULL);
+    glShaderSource(fragmentShader, 1, &fragment_source, nullptr);
     glCompileShader(fragmentShader);
     if (!ValidateShader(fragmentShader, "fragment")) {
         return;
@@ -51,7 +63,7 @@ void Shader::Build(const char *vertex_source, const char *fragment_source) {
     glGetProgramiv(mProgram, GL_LINK_STATUS, &link_success);
     if (!link_success) {
         char link_info_log[512];
-        glGetProgramInfoLog(mProgram, 512, NULL, link_info_log);
+        glGetProgramInfoLog(mProgram, 512, nullptr, link_info_log);
         std::cerr << "GL: Program linking failed!\n\t" << link_info_log << std::endl;
     }
 
@@ -59,17 +71,17 @@ void Shader::Build(const char *vertex_source, const char *fragment_source) {
     glDeleteShader(fragmentShader);
 }
 
-bool Shader::ValidateShader(GLuint shader, const char* type) {
+bool Shader::ValidateShader(GLuint shader, const char *type) {
     int success;
     char info_log[512];
     glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
     if (!success) {
-        glGetShaderInfoLog(shader, 512, NULL, info_log);
+        glGetShaderInfoLog(shader, 512, nullptr, info_log);
         std::cerr << "GL:" << type << " Shader compilation failed!\n\t" << info_log << std::endl;
     }
     return bool(success);
 }
 
-void Shader::Use() {
+void Shader::Use() const {
     glUseProgram(mProgram);
 }

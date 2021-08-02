@@ -11,14 +11,23 @@
 class Mesh {
 private:
     float *mVertices;
+    int *mIndices;
     int mVertexCount;
+    int mIndiceCount;
     GLuint mVBO;
     GLuint mVAO;
+    GLuint mEBO;
 
 public:
-    Mesh();
+    Mesh() {}
+
+    Mesh(float *vertices, int vertexCount);
+
+    Mesh(float *vertices, int vertexCount, int *indices, int indiceCount);
 
     void Draw(Shader &shader) const;
+
+    void DrawArray(Shader &shader) const;
 };
 
 
