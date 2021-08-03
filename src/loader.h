@@ -9,14 +9,13 @@
 #include <fstream>
 #include <string>
 
+#define CGLTF_IMPLEMENTATION
 #include "dependencies/cgltf.h"
 
 class Mesh;
 
 class Loader {
 public:
-    ~Loader();
-
     void Load(Mesh &mesh, const std::string filePath);
 };
 #endif //RENDERLIB_LOADER_H

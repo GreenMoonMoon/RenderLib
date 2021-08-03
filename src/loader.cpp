@@ -4,21 +4,12 @@
 #include "loader.h"
 
 void Loader::Load(Mesh &mesh, const std::string filePath) {
-    std::ifstream inf{filePath};
+    cgltf_options cgltfOptions;
+    cgltf_data* cgltfData = nullptr;
+    cgltf_result cgltfResult = cgltf_parse_file(&cgltfOptions, filePath.c_str(), &cgltfData);
+    if(cgltfResult == cgltf_result_success) {
 
-    if (!inf) {
-        std::cerr << "Cannot load file: " << filePath << std::endl;
-        return;
+
+        cgltf_free(cgltfData);
     }
-
-    //debug
-    while (inf) {
-        std::string input;
-        std::getline(inf, input);
-        std::cout << input << '\n';
-    }
-}
-
-Loader::~Loader() {
-
 }
