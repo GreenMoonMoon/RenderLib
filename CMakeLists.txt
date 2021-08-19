@@ -27,5 +27,5 @@ FetchContent_MakeAvailable(glad)
 # Add the tests project
 add_subdirectory(renderlib_tests)
 
-add_executable(RenderLib main.cpp src/mesh.cpp src/shader.cpp src/loader.cpp)
+add_executable(RenderLib src/main.cpp src/mesh.cpp src/shader.cpp src/app.cpp)
 target_link_libraries(RenderLib glfw glad)

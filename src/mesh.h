@@ -1,12 +1,12 @@
 //
 // Created by jboisvert on 2021-07-15.
 //
-#include "core.h"
-#include "shader.h"
+#include "app.h"
 
 #ifndef RENDERLIB_MESH_H
 #define RENDERLIB_MESH_H
 
+class Shader;
 
 class Mesh {
 private:
@@ -28,6 +28,10 @@ public:
     void Draw(Shader &shader) const;
 
     void DrawArray(Shader &shader) const;
+};
+
+struct Cube : public Mesh {
+    Cube(float width, float height, float depth);
 };
 
 

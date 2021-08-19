@@ -9,7 +9,7 @@
 #include <fstream>
 #include <string>
 
-#include "core.h"
+#include "app.h"
 
 class Shader {
 public:
