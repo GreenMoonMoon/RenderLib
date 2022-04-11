@@ -19,20 +19,20 @@ private:
     GLuint mEBO;
 
 public:
-    Mesh() {}
+    Mesh() = default;
+
+    ~Mesh();
 
     Mesh(float *vertices, int vertexCount);
 
-    Mesh(float *vertices, int vertexCount, int *indices, int indiceCount);
+    void Build(float *vertices, int vertexCount, int *indices, int indiceCount);
 
     void Draw(Shader &shader) const;
 
     void DrawArray(Shader &shader) const;
 };
 
-struct Cube : public Mesh {
-    Cube(float width, float height, float depth);
-};
+Mesh GenerateCubeMesh(float width, float height, float depth);
 
 
 #endif //RENDERLIB_MESH_H

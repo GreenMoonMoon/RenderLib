@@ -28,10 +28,18 @@ Shader::Shader(const char *vertex_source, const char *fragment_source) {
 
 void Shader::LoadFromFile(const char *vertexFile, const char *fragmentFile) {
     std::ifstream inVertexStream{vertexFile};
+    if (inVertexStream.fail()) {
+        std::cerr << "Could not open vertex shader file : " << vertexFile << '\n';
+        return;
+    }
     std::string vertexSource((std::istreambuf_iterator<char>(inVertexStream)), std::istreambuf_iterator<char>());
     inVertexStream.close();
 
     std::ifstream inFragmentStream{fragmentFile};
+    if (inVertexStream.fail()) {
+        std::cerr << "Could not open fragment shader file : " << vertexFile << '\n';
+        return;
+    }
     std::string fragmentSource((std::istreambuf_iterator<char>(inFragmentStream)), std::istreambuf_iterator<char>());
     inVertexStream.close();
 
