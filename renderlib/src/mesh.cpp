@@ -2,7 +2,7 @@
 // Created by jboisvert on 2021-07-15.
 //
 #include "mesh.h"
-#include "shader.h"
+#include "gl_shader.h"
 
 void Mesh::Build(float *vertices, int vertexCount, int *indices, int indiceCount) {
     mVertexCount = vertexCount;

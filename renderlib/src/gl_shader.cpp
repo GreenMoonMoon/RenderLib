@@ -1,7 +1,4 @@
-//
-// Created by jboisvert on 2021-07-15.
-//
-#include "shader.h"
+#include "gl_shader.h"
 
 //language=GLSL
 const auto *basic_vs_source = "#version 460 core\nlayout (location = 0) in vec3 aPos;\n\nvoid main()\n{\n\tgl_Position = vec4(aPos, 1.0);\n}";
@@ -9,15 +6,15 @@ const auto *basic_vs_source = "#version 460 core\nlayout (location = 0) in vec3 
 // language=GLSL
 const char *basic_fs_source = "#version 460 core\nout vec4 FragColor;\n\nvoid main()\n{\n\tFragColor = vec4(1.0f);\n}";
 
-Shader::Shader() {
+renderlib::Shader::Shader() {
     mProgram = -1;
 }
 
-Shader::Shader(const char *vertex_source, const char *fragment_source) {
+renderlib::Shader::Shader(const char *vertex_source, const char *fragment_source) {
     Build(vertex_source, fragment_source);
 }
 
-void Shader::LoadFromFile(const char *vertexFile, const char *fragmentFile) {
+void renderlib::Shader::LoadFromFile(const char *vertexFile, const char *fragmentFile) {
     std::ifstream inVertexStream{vertexFile};
     if (inVertexStream.fail()) {
         std::cerr << "Could not open vertex shader file : " << vertexFile << '\n';
@@ -37,7 +34,7 @@ void Shader::LoadFromFile(const char *vertexFile, const char *fragmentFile) {
     Build(vertexSource.c_str(), fragmentSource.c_str());
 }
 
-void Shader::Build(const char *vertex_source, const char *fragment_source) {
+void renderlib::Shader::Build(const char *vertex_source, const char *fragment_source) {
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertex_source, nullptr);
     glCompileShader(vertexShader);
@@ -70,7 +67,7 @@ void Shader::Build(const char *vertex_source, const char *fragment_source) {
     glDeleteShader(fragmentShader);
 }
 
-bool Shader::ValidateShader(GLuint shader, const char *type) {
+bool renderlib::Shader::ValidateShader(GLuint shader, const char *type) {
     int success;
     char info_log[512];
     glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
@@ -81,6 +78,6 @@ bool Shader::ValidateShader(GLuint shader, const char *type) {
     return bool(success);
 }
 
-void Shader::Use() const {
+void renderlib::Shader::Use() const {
     glUseProgram(mProgram);
 }

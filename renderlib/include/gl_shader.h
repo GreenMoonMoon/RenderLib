@@ -2,15 +2,16 @@
 // Created by jboisvert on 2021-07-15.
 //
 
-#ifndef RENDERLIB_SHADER_H
-#define RENDERLIB_SHADER_H
+#ifndef RENDERLIB_GL_SHADER_H
+#define RENDERLIB_GL_SHADER_H
 
 #include <iostream>
 #include <fstream>
 #include <string>
 
-#include "app.h"
+#include "glad/glad.h"
 
+namespace renderlib {
 class Shader {
 public:
     GLuint mProgram;
@@ -26,7 +27,8 @@ public:
 private:
     void Build(const char *vertex_source, const char *fragment_source);
 
-    bool ValidateShader(GLuint shader, const char* type);
+    bool ValidateShader(GLuint shader, const char *type);
 };
 
-#endif //RENDERLIB_SHADER_H
+}
+#endif //RENDERLIB_GL_SHADER_H
