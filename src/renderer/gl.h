@@ -35,7 +35,7 @@ GLFWwindow *initialize() {
 }
 
 void cleanup(GLFWwindow *window) {
-    //Cleanup
+    glfwDestroyWindow(window);
     glfwTerminate();
 }
 

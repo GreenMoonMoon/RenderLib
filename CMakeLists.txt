@@ -40,7 +40,8 @@ add_subdirectory(renderlib_tests)
 set(LIB_FILES
         "src/lib.cpp"
 #        "src/mesh.cpp"
-#        "src/shader.cpp"
+        "src/shader.cpp"
+        "src/shader.h"
 #        "src/app.cpp"
         )
 

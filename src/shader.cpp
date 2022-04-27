@@ -3,20 +3,11 @@
 //
 #include "shader.h"
 
-const char *basic_vs_source = "#version 460 core\n"
-                              "layout (location = 0) in vec3 aPos;\n"
-                              "\n"
-                              "void main()\n"
-                              "{\n"
-                              "\tgl_Position = vec4(aPos, 1.0);\n"
-                              "}";
-const char *basic_fs_source = "#version 460 core\n"
-                              "out vec4 FragColor;\n"
-                              "\n"
-                              "void main()\n"
-                              "{\n"
-                              "\tFragColor = vec4(1.0f);\n"
-                              "}";
+//language=GLSL
+const auto *basic_vs_source = "#version 460 core\nlayout (location = 0) in vec3 aPos;\n\nvoid main()\n{\n\tgl_Position = vec4(aPos, 1.0);\n}";
+
+// language=GLSL
+const char *basic_fs_source = "#version 460 core\nout vec4 FragColor;\n\nvoid main()\n{\n\tFragColor = vec4(1.0f);\n}";
 
 Shader::Shader() {
     mProgram = -1;
