@@ -20,14 +20,18 @@ public:
 
     Shader(const char *vertex_source, const char *fragment_source);
 
+    static Shader Default();
+
     void LoadFromFile(const char *vertexFile, const char *fragmentFile);
 
     void Use() const;
 
+    GLuint GetProgram() const;
+
 private:
     void Build(const char *vertex_source, const char *fragment_source);
 
-    bool ValidateShader(GLuint shader, const char *type);
+    static bool ValidateShader(GLuint shader, const char *type);
 };
 
 }

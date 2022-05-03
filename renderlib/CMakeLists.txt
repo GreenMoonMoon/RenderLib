@@ -8,7 +8,7 @@ set(RENDERLIB_HEADERS
         include/renderlib.h)
 
 set(RENDERLIB_DEPENDENCIES
-        ${glm_INCLUDE_DIR}
+        ${glm_SOURCE_DIR} # glm headers are located in ${glm_SOURCE_DIR}/glm
         ${glfw_INCLUDE_DIR}
         ${glad_INCLUDE_DIR})
 

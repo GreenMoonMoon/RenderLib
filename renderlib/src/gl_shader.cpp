@@ -1,10 +1,10 @@
 #include "gl_shader.h"
 
 //language=GLSL
-const auto *basic_vs_source = "#version 460 core\nlayout (location = 0) in vec3 aPos;\n\nvoid main()\n{\n\tgl_Position = vec4(aPos, 1.0);\n}";
+auto *basic_vs_source = "#version 460 core\nlayout (location = 0) in vec3 aPos;\nlayout (location = 1) in vec3 aColor;\n\nout vec3 Color;\n\nuniform mat4 rotation;\n\nvoid main()\n{\n    Color = aColor;\n    gl_Position = rotation * vec4(aPos, 1.0);\n}";
 
 // language=GLSL
-const char *basic_fs_source = "#version 460 core\nout vec4 FragColor;\n\nvoid main()\n{\n\tFragColor = vec4(1.0f);\n}";
+auto *basic_fs_source = "#version 460 core\nin vec3 Color;\n\nout vec4 FragColor;\n\nvoid main()\n{\n\tFragColor = vec4(Color, 1.0);\n}";
 
 renderlib::Shader::Shader() {
     mProgram = -1;
@@ -80,4 +80,12 @@ bool renderlib::Shader::ValidateShader(GLuint shader, const char *type) {
 
 void renderlib::Shader::Use() const {
     glUseProgram(mProgram);
+}
+
+renderlib::Shader renderlib::Shader::Default() {
+    return {basic_vs_source, basic_fs_source};
+}
+
+GLuint renderlib::Shader::GetProgram() const {
+    return mProgram;
 }

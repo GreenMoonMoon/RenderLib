@@ -28,6 +28,5 @@ FetchContent_Declare(
 FetchContent_Populate(glm)
 
 FetchContent_MakeAvailable(glad glfw)
-
 add_subdirectory(renderlib)
 add_subdirectory(examples)
